@@ -40,12 +40,11 @@ class AuthTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         json_data = response.get_json()
         self.assertIn('access_token', json_data)
-        self.access_token = json_data['access_token']  # Store token for use in other tests
+        self.access_token = json_data['access_token'] 
 
     def test_protected(self):
         """Test accessing a protected route."""
-        # First, ensure login is done before accessing protected route
-        self.test_login()  # Ensure login is successful to obtain a valid token
+        self.test_login()
         
         response = self.client.get('/protected', headers={
             'Authorization': f'Bearer {self.access_token}'
